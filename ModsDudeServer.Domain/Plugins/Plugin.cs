@@ -18,9 +18,9 @@ public class Plugin
 
 
     public PluginId Id { get; }
-    public DisplayName Name { get; }
-    public Description Description { get; }
-    public PluginFileInfo File { get; }
+    public DisplayName Name { get; set; }
+    public Description Description { get; set; }
+    public PluginFileInfo File { get; set; }
 
 
     public static Plugin NewPlugin(PluginId id, DisplayName name, Description description, PluginFileInfo file)
