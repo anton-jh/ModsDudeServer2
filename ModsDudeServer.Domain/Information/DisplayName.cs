@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ValueOf;
 
-namespace ModsDudeServer.Domain.ValueObjects;
-public class Username : ValueOf<string, Username>
+namespace ModsDudeServer.Domain.Information;
+public class DisplayName : ValueOf<string, DisplayName>
 {
     protected override void Validate()
     {
-        Value.MustBe().AtLeastThisLong(4);
+        Value.MustBe().NotEmptyOrWhitespace();
     }
 }

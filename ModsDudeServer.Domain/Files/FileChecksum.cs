@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ValueOf;
 
-namespace ModsDudeServer.Domain.ValueObjects;
-public class Tag : ValueOf<string, Tag>
+namespace ModsDudeServer.Domain.Files;
+public class FileChecksum : ValueOf<byte[], FileChecksum>
 {
 }

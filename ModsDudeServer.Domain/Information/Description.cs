@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ValueOf;
 
-namespace ModsDudeServer.Domain.ValueObjects;
-public class ModVersionString : ValueOf<string, ModVersionString>
+namespace ModsDudeServer.Domain.Information;
+public class Description : ValueOf<string, Description>
 {
 }
