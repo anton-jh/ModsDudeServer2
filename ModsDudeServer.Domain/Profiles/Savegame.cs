@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Profiles;
 public class Savegame
 {
-    public Savegame(FileName fileName, CheckOutInfo? checkOutInfo, CheckInInfo checkInInfo)
+    public Savegame(FileName fileName, CheckInInfo checkInInfo)
     {
         FileName = fileName;
-        CheckOutInfo = checkOutInfo;
         CheckInInfo = checkInInfo;
     }
 
@@ -24,16 +23,20 @@ public class Savegame
 
     public void CheckOut(UserName userName)
     {
-        CheckOutInfo = CheckOutInfo.From((userName, DateTime.Now));
+        CheckOutInfo = new()
+        {
+            UserName = userName,
+            Time = DateTime.Now
+        };
     }
 
     public void CheckIn(UserName userName)
     {
-        CheckInInfo = CheckInInfo.From((userName, DateTime.Now));
+        CheckInInfo = new()
+        {
+            UserName = userName,
+            Time = DateTime.Now
+        };
         CheckOutInfo = null;
     }
-
-
-    public static Savegame NewSavegame(FileName fileName, UserName checkedInBy)
-        => new(fileName, null, CheckInInfo.From((checkedInBy, DateTime.Now)));
 }

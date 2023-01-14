@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using ValueOf;
 
 namespace ModsDudeServer.Domain.Mods;
-public class ModFileInfo : ValueOf<(FileName FileName, FileSize FileSize), ModFileInfo>
+public class ModFileInfo
 {
-    public FileName FileName => Value.FileName;
-    public FileSize FileSize => Value.FileSize;
+    public required FileName FileName { get; init; }
+    public required FileSize FileSize { get; init; }
 }

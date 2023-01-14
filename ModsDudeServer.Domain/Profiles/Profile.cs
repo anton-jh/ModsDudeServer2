@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Profiles;
 public class Profile
 {
-    public Profile(ProfileId id, GameId gameId, DisplayName name, IEnumerable<ModDependency> mods, Savegame? savegame)
+    public Profile(GameId gameId, DisplayName name)
     {
-        Id = id;
+        Id = ProfileId.NewId();
         GameId = gameId;
         Name = name;
-        Savegame = savegame;
-        Mods = new HashSet<ModDependency>(mods);
+        Mods = new HashSet<ModDependency>();
     }
 
 
@@ -24,8 +23,4 @@ public class Profile
     public DisplayName Name { get; set; }
     public ISet<ModDependency> Mods { get; }
     public Savegame? Savegame { get; set; }
-
-
-    public static Profile NewProfile(GameId gameId, DisplayName name)
-        => new(ProfileId.NewId(), gameId, name, Enumerable.Empty<ModDependency>(), null);
 }

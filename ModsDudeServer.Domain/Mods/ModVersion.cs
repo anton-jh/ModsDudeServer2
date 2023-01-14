@@ -7,21 +7,16 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Mods;
 public class ModVersion
 {
-    public ModVersion(ModId modId, ModVersionString versionString, DateTime createdOn, ModFileInfo? file)
+    public ModVersion(ModId modId, ModVersionString versionString)
     {
         ModId = modId;
         VersionString = versionString;
-        CreatedOn = createdOn;
-        File = file;
+        CreatedOn = DateTime.Now;
     }
 
 
     public ModId ModId { get; }
     public ModVersionString VersionString { get; }
-    public DateTime CreatedOn { get; }
-    public ModFileInfo? File { get; }
-
-
-    public static ModVersion NewModVersion(ModId modId, ModVersionString versionString, ModFileInfo? file)
-        => new(modId, versionString, DateTime.Now, file);
+    public DateTime CreatedOn { get; init; }
+    public ModFileInfo? File { get; set; }
 }

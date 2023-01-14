@@ -8,14 +8,8 @@ using System.Threading.Tasks;
 using ValueOf;
 
 namespace ModsDudeServer.Domain.Games;
-public class PluginDependency : ValueOf<(PluginId PluginId, int Priority), PluginDependency>
+public class PluginDependency
 {
-    protected override void Validate()
-    {
-        Value.Priority.MustBe().GreaterThanOrEqualTo(0);
-    }
-
-
-    public PluginId PluginId => Value.PluginId;
-    public int Priority => Value.Priority;
+    public required PluginId PluginId { get; init; }
+    public required int Priority { get; set; }
 }

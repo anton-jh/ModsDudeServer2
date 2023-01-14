@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Repo;
 public class Repo
 {
-    public Repo(RepoId id, DisplayName name)
+    public Repo(DisplayName name)
     {
-        Id = id;
+        Id = RepoId.NewId();
         Name = name;
     }
 
 
-    public RepoId Id { get; }
+    public RepoId Id { get; init; }
     public DisplayName Name { get; set; }
-
-    public static Repo NewServer(DisplayName name)
-        => new(RepoId.NewId(), name);
 }

@@ -8,17 +8,14 @@ using System.Threading.Tasks;
 using ValueOf;
 
 namespace ModsDudeServer.Domain.Profiles;
-public class CheckOutInfo : ValueOf<(UserName UserName, DateTime Time), CheckOutInfo>
+public class CheckOutInfo
 {
-    public UserName UserName => Value.UserName;
-    public DateTime Time => Value.Time;
+    public required UserName UserName { get; set; }
 
-
-    protected override void Validate()
+    private DateTime _time;
+    public required DateTime Time
     {
-        if (Time > DateTime.Now)
-        {
-            throw new DomainValidationException("Savegame check-out time cannot be in the future.");
-        }
+        get => _time;
+        set => _time = value <= DateTime.Now ? value : throw new DomainValidationException("Savegame check-out time cannot be in the future.");
     }
 }
