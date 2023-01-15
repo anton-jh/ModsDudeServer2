@@ -21,8 +21,4 @@ public class Plugin
     public DisplayName Name { get; set; }
     public Description Description { get; set; }
     public PluginFileInfo File { get; set; }
-
-
-    public static Plugin NewPlugin(PluginId id, DisplayName name, Description description, PluginFileInfo file)
-        => new(id, name, description, file);
 }
