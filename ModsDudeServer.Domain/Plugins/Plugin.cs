@@ -8,17 +8,16 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Plugins;
 public class Plugin
 {
-    public Plugin(PluginId id, DisplayName name, Description description, PluginFileInfo file)
+    public Plugin(PluginId id, DisplayName name, Description description)
     {
         Id = id;
         Name = name;
         Description = description;
-        File = file;
     }
 
 
     public PluginId Id { get; }
     public DisplayName Name { get; set; }
     public Description Description { get; set; }
-    public PluginFileInfo File { get; set; }
+    public required PluginFileInfo File { get; set; }
 }

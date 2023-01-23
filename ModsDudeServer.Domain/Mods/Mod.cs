@@ -15,7 +15,7 @@ public class Mod
         GameId = gameId;
         Name = name;
         Description = description;
-        Tags = new HashSet<Tag>();
+        Categories = new HashSet<Category>();
         Versions = new HashSet<ModVersion>();
     }
 
@@ -24,6 +24,6 @@ public class Mod
     public GameId GameId { get; }
     public DisplayName Name { get; }
     public Description Description { get; set; }
-    public ISet<Tag> Tags { get; init; }
+    public ISet<Category> Categories { get; init; }
     public ISet<ModVersion> Versions { get; init; }
 }
