@@ -18,7 +18,7 @@ internal class ModEntityTypeConfiguration : IEntityTypeConfiguration<Mod>
         builder.HasOne<Game>().WithMany().HasForeignKey(mod => mod.GameId);
         builder.Property(mod => mod.Name);
         builder.Property(mod => mod.Description);
-        builder.HasMany(mod => mod.Categories);
+        builder.HasMany(mod => mod.Categories).WithMany();
         builder.HasMany(mod => mod.Versions).WithOne().HasForeignKey(modVersion => modVersion.ModId);
     }
 }
