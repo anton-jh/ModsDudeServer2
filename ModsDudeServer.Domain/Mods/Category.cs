@@ -12,6 +12,7 @@ public class Category
 {
     public Category(DisplayName name)
     {
+        Id = CategoryId.NewId();
         Name = name;
     }
 
