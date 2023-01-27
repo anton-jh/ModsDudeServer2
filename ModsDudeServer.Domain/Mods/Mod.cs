@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModsDudeServer.Domain.Helpers;
 
 namespace ModsDudeServer.Domain.Mods;
 public class Mod
@@ -16,7 +17,7 @@ public class Mod
         Name = name;
         Description = description;
         Categories = new HashSet<Category>();
-        Versions = new HashSet<ModVersion>();
+        Versions = new ProtectedHashSet<ModVersion>();
     }
 
 
