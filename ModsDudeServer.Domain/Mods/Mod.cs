@@ -5,29 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ModsDudeServer.Domain.Helpers;
 
 namespace ModsDudeServer.Domain.Mods;
 public class Mod
 {
-    public Mod(ModId id, GameId gameId, DisplayName name, IEnumerable<Tag> tags, Description description, IEnumerable<ModVersion> versions)
+    public Mod(ModId id, GameId gameId, DisplayName name, Description description)
     {
         Id = id;
         GameId = gameId;
         Name = name;
-        Tags = new HashSet<Tag>(tags);
         Description = description;
-        Versions = new HashSet<ModVersion>(versions);
+        Categories = new HashSet<Category>();
+        Versions = new ProtectedHashSet<ModVersion>();
     }
 
 
     public ModId Id { get; }
     public GameId GameId { get; }
     public DisplayName Name { get; }
-    public ISet<Tag> Tags { get; }
     public Description Description { get; set; }
-    public ISet<ModVersion> Versions { get; }
-
-
-    public static Mod NewMod(ModId id, GameId gameId, DisplayName name, IEnumerable<Tag> tags, Description description, ModVersion version)
-        => new(id, gameId, name, tags, description, new[] { version });
+    public ISet<Category> Categories { get; init; }
+    public ISet<ModVersion> Versions { get; init; }
 }

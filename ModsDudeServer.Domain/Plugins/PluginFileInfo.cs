@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using ValueOf;
 
 namespace ModsDudeServer.Domain.Plugins;
-public class PluginFileInfo : ValueOf<(FileName FileName, FileChecksum Checksum), PluginFileInfo>
+public class PluginFileInfo
 {
-    public FileName FileName => Value.FileName;
-    public FileChecksum Checksum => Value.Checksum;
+    public required FileName FileName { get; init; }
+    public required FileChecksum Checksum { get; init; }
 }

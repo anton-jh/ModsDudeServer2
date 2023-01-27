@@ -9,31 +9,33 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Profiles;
 public class Savegame
 {
-    public Savegame(FileName fileName, CheckOutInfo? checkOutInfo, CheckInInfo checkInInfo)
+    public Savegame(FileName fileName)
     {
         FileName = fileName;
-        CheckOutInfo = checkOutInfo;
-        CheckInInfo = checkInInfo;
     }
 
 
     public FileName FileName { get; }
-    public CheckOutInfo? CheckOutInfo { get; private set; }
-    public CheckInInfo CheckInInfo { get; private set; }
+    public required SavegameStatus Status { get; set; }
 
 
-    public void CheckOut(UserName userName)
+    public void CheckOut(UserId userId)
     {
-        CheckOutInfo = CheckOutInfo.From((userName, DateTime.Now));
+        Status = new()
+        {
+            UserId = userId,
+            Time = DateTime.Now,
+            IsCheckedOut = true
+        };
     }
 
-    public void CheckIn(UserName userName)
+    public void CheckIn(UserId userId)
     {
-        CheckInInfo = CheckInInfo.From((userName, DateTime.Now));
-        CheckOutInfo = null;
+        Status = new()
+        {
+            UserId = userId,
+            Time = DateTime.Now,
+            IsCheckedOut = false
+        };
     }
-
-
-    public static Savegame NewSavegame(FileName fileName, UserName checkedInBy)
-        => new(fileName, null, CheckInInfo.From((checkedInBy, DateTime.Now)));
 }

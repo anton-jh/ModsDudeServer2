@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using ValueOf;
 
 namespace ModsDudeServer.Domain.Profiles;
-public class ModDependency : ValueOf<(ModId ModId, ModVersionString ModVersion, bool IsProtected), ModDependency>
+public class ModDependency
 {
-    public ModId ModId => Value.ModId;
-    public ModVersionString ModVersion => Value.ModVersion;
-    public bool IsProtected => Value.IsProtected;
+    public required ModId ModId { get; init; }
+    public required ModVersionString ModVersion { get; set; }
+    public required bool IsProtected { get; set; }
 }

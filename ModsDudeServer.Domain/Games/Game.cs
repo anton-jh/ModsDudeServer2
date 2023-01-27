@@ -9,21 +9,17 @@ using System.Threading.Tasks;
 namespace ModsDudeServer.Domain.Games;
 public class Game
 {
-    public Game(GameId id, RepoId repoId, DisplayName name, IEnumerable<PluginDependency> plugins)
+    public Game(RepoId repoId, DisplayName name)
     {
-        Id = id;
+        Id = GameId.NewId();
         RepoId = repoId;
         Name = name;
-        Plugins = new HashSet<PluginDependency>(plugins);
+        Plugins = new HashSet<PluginDependency>();
     }
 
 
-    public GameId Id { get; }
+    public GameId Id { get; init; }
     public RepoId RepoId { get; }
     public DisplayName Name { get; set; }
-    public ISet<PluginDependency> Plugins { get; }
-
-
-    public static Game NewGame(RepoId repoId, DisplayName name, IEnumerable<PluginDependency> plugins)
-        => new(GameId.NewId(), repoId, name, plugins);
+    public ISet<PluginDependency> Plugins { get; init; }
 }
