@@ -51,6 +51,19 @@ namespace ModsDudeServer.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Games",
                 columns: table => new
                 {
@@ -65,6 +78,27 @@ namespace ModsDudeServer.DataAccess.Migrations
                         name: "FK_Games_Repos_RepoId",
                         column: x => x.RepoId,
                         principalTable: "Repos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RepoMembership",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RepoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Level = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepoMembership", x => new { x.UserId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_RepoMembership_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -219,6 +253,11 @@ namespace ModsDudeServer.DataAccess.Migrations
                 name: "IX_Profiles_GameId",
                 table: "Profiles",
                 column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName");
         }
 
         /// <inheritdoc />
@@ -240,6 +279,9 @@ namespace ModsDudeServer.DataAccess.Migrations
                 name: "Plugins");
 
             migrationBuilder.DropTable(
+                name: "RepoMembership");
+
+            migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropTable(
@@ -247,6 +289,9 @@ namespace ModsDudeServer.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Mods");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Games");

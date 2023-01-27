@@ -47,6 +47,8 @@ public class ApplicationDbContext : DbContext
         ConfigureValueOfConverter<ProfileId, Guid>();
         ConfigureValueOfConverter<RepoId, Guid>();
         ConfigureValueOfConverter<UserId, Guid>();
+        ConfigureValueOfConverter<UserName, string>();
+        ConfigureValueOfConverter<PasswordHash, string>();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -57,6 +59,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new PluginEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ProfileEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new RepoEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
     }
 
 
@@ -66,4 +69,5 @@ public class ApplicationDbContext : DbContext
     public required DbSet<Plugin> Plugins { get; init; }
     public required DbSet<Profile> Profiles { get; init; }
     public required DbSet<Repo> Repos { get; init; }
+    public required DbSet<User> Users { get; init; }
 }

@@ -12,7 +12,7 @@ using ModsDudeServer.DataAccess;
 namespace ModsDudeServer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230127102345_Initial")]
+    [Migration("20230127143026_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -161,6 +161,26 @@ namespace ModsDudeServer.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Repos");
+                });
+
+            modelBuilder.Entity("ModsDudeServer.Domain.Users.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("CategoryMod", b =>
@@ -368,6 +388,36 @@ namespace ModsDudeServer.DataAccess.Migrations
                     b.Navigation("Mods");
 
                     b.Navigation("Savegame");
+                });
+
+            modelBuilder.Entity("ModsDudeServer.Domain.Users.User", b =>
+                {
+                    b.OwnsMany("ModsDudeServer.Domain.Users.RepoMembership", "RepoMemberships", b1 =>
+                        {
+                            b1.Property<Guid>("UserId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<int>("Level")
+                                .HasColumnType("int");
+
+                            b1.Property<Guid>("RepoId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("UserId", "Id");
+
+                            b1.ToTable("RepoMembership");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserId");
+                        });
+
+                    b.Navigation("RepoMemberships");
                 });
 
             modelBuilder.Entity("ModsDudeServer.Domain.Mods.Mod", b =>
