@@ -62,6 +62,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new PluginEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ProfileEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new RepoEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new RepoInviteEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
     }
 

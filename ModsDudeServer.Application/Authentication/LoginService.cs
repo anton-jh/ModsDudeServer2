@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ModsDudeServer.Application.Authentication;
-internal class LoginService
+public class LoginService : ILoginService
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly TokenOptions _options;
@@ -25,12 +25,17 @@ internal class LoginService
     }
 
 
-    public string Login(UserName username, Password password)
+    public string GetToken(LoginQuery loginQuery)
     {
 
-        User? user = _dbContext.Users.Where(x => x.UserName == username).FirstOrDefault();
+        User? user = _dbContext.Users.Where(x => x.UserName == loginQuery.Username).FirstOrDefault();
 
-        if (user is null || !VerifyPassword(password, user.PasswordHash))
+        if (user is null)
+        {
+            throw new IncorrectUsernameException();
+        }
+
+        if (!VerifyPassword(loginQuery.Password, user.PasswordHash))
         {
             throw new IncorrectPasswordException();
         }

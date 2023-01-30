@@ -83,6 +83,27 @@ namespace ModsDudeServer.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RepoInvites",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RepoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MembershipLevel = table.Column<int>(type: "int", nullable: false),
+                    Expires = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    MultiUse = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepoInvites", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RepoInvites_Repos_RepoId",
+                        column: x => x.RepoId,
+                        principalTable: "Repos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RepoMembership",
                 columns: table => new
                 {
@@ -255,6 +276,11 @@ namespace ModsDudeServer.DataAccess.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RepoInvites_RepoId",
+                table: "RepoInvites",
+                column: "RepoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_UserName",
                 table: "Users",
                 column: "UserName");
@@ -277,6 +303,9 @@ namespace ModsDudeServer.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Plugins");
+
+            migrationBuilder.DropTable(
+                name: "RepoInvites");
 
             migrationBuilder.DropTable(
                 name: "RepoMembership");
