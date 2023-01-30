@@ -12,25 +12,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ModsDudeServer.Application.Authentication;
-internal class LoginService
+public class LoginService : ILoginService
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly TokenOptions _options;
+    private readonly AuthenticationOptions _options;
 
 
-    public LoginService(ApplicationDbContext dbContext, IOptions<TokenOptions> options, UserName username, Password password)
+    public LoginService(ApplicationDbContext dbContext, IOptions<AuthenticationOptions> options)
     {
         _dbContext = dbContext;
         _options = options.Value;
     }
 
 
-    public string Login(UserName username, Password password)
+    public string GetToken(LoginQuery loginQuery)
     {
 
-        User? user = _dbContext.Users.Where(x => x.UserName == username).FirstOrDefault();
+        User? user = _dbContext.Users.Where(x => x.UserName == loginQuery.Username).FirstOrDefault();
 
-        if (user is null || !VerifyPassword(password, user.PasswordHash))
+        if (user is null)
+        {
+            throw new IncorrectUsernameException();
+        }
+
+        if (!VerifyPassword(loginQuery.Password, user.PasswordHash))
         {
             throw new IncorrectPasswordException();
         }

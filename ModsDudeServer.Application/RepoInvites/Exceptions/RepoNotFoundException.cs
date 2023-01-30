@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.Invites.Exceptions;
+namespace ModsDudeServer.Application.RepoInvites.Exceptions;
 public class RepoNotFoundException : Exception
 {
     public RepoNotFoundException(RepoId repoId)

@@ -1,6 +1,6 @@
 ﻿using ModsDudeServer.Application.Authentication;
 using ModsDudeServer.Application.Commands;
-using ModsDudeServer.Application.Invites.Exceptions;
+using ModsDudeServer.Application.RepoInvites.Exceptions;
 using ModsDudeServer.DataAccess;
 using ModsDudeServer.Domain.Repo;
 using ModsDudeServer.Domain.Repos;
@@ -11,17 +11,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.Invites;
+namespace ModsDudeServer.Application.RepoInvites;
 public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly IAuthenticatedUserProvider _authenticatedUserProvider;
+    private readonly RepoInvitePruner _pruner;
 
 
-    public ClaimRepoInviteHandler(ApplicationDbContext dbContext, IAuthenticatedUserProvider authenticatedUserProvider)
+    public ClaimRepoInviteHandler(ApplicationDbContext dbContext, RepoInvitePruner pruner)
     {
         _dbContext = dbContext;
-        _authenticatedUserProvider = authenticatedUserProvider;
+        _pruner = pruner;
     }
 
 
@@ -39,11 +39,9 @@ public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
             throw new InviteExpiredException();
         }
 
-        User user = _authenticatedUserProvider.Get();
-
-        if (CheckAlreadyMember(user, invite.RepoId))
+        if (CheckAlreadyMember(command.User, invite.RepoId))
         {
-            throw new AlreadyMemberException(user.Id, invite.RepoId);
+            throw new AlreadyMemberException(command.User.Id, invite.RepoId);
         }
 
         if (invite.MultiUse == false)
@@ -57,9 +55,11 @@ public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
             Level = invite.MembershipLevel
         };
 
-        user.RepoMemberships.Add(membership);
+        command.User.RepoMemberships.Add(membership);
 
         _dbContext.SaveChanges();
+
+        _pruner.Prune();
     }
 
 

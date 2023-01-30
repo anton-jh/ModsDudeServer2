@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.Invites;
+namespace ModsDudeServer.Application.RepoInvites;
 public class CreateRepoInviteCommand
 {
     public CreateRepoInviteCommand(Guid repoId, int membershipLevel, DateTimeOffset expires, bool multiUse)

@@ -1,5 +1,5 @@
 ﻿using ModsDudeServer.Application.Commands;
-using ModsDudeServer.Application.Invites.Exceptions;
+using ModsDudeServer.Application.RepoInvites.Exceptions;
 using ModsDudeServer.DataAccess;
 using ModsDudeServer.Domain.Repo;
 using ModsDudeServer.Domain.Repos;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.Invites;
+namespace ModsDudeServer.Application.RepoInvites;
 public class CreateRepoInviteHandler : ICommandHandler<CreateRepoInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;

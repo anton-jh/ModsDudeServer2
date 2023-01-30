@@ -1,6 +1,6 @@
 ﻿using ModsDudeServer.Application.Authentication.Exceptions;
 using ModsDudeServer.Application.Commands;
-using ModsDudeServer.Application.Invites;
+using ModsDudeServer.Application.RepoInvites;
 using ModsDudeServer.DataAccess;
 using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
@@ -36,7 +36,7 @@ public class SignupHandler : ICommandHandler<SignupCommand>
         _dbContext.Users.Add(user);
         _dbContext.SaveChanges();
 
-        _claimInviteHandler.Handle(new(command.RepoInviteId.Value));
+        _claimInviteHandler.Handle(new(command.RepoInviteId.Value, user));
     }
 
 

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModsDudeServer.Application\ModsDudeServer.Application.csproj" />
     <ProjectReference Include="..\ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj" />
   </ItemGroup>
 

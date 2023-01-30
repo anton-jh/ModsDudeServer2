@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.Invites.Exceptions;
+namespace ModsDudeServer.Application.RepoInvites.Exceptions;
 public class AlreadyMemberException : Exception
 {
     public AlreadyMemberException(UserId userId, RepoId repoId)
