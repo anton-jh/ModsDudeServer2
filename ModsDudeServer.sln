@@ -5,9 +5,11 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModsDudeServer.API", "ModsDudeServer.API\ModsDudeServer.API.csproj", "{9EFDBD44-2DD9-4A7B-ADD2-E35D2627BF4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModsDudeServer.Domain", "ModsDudeServer.Domain\ModsDudeServer.Domain.csproj", "{607C40B2-1953-4B5B-A013-0367A4BC73CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModsDudeServer.Domain", "ModsDudeServer.Domain\ModsDudeServer.Domain.csproj", "{607C40B2-1953-4B5B-A013-0367A4BC73CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModsDudeServer.DataAccess", "ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj", "{80125D70-07F3-43DB-A790-1FC8851AC2A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModsDudeServer.DataAccess", "ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj", "{80125D70-07F3-43DB-A790-1FC8851AC2A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModsDudeServer.Application", "ModsDudeServer.Application\ModsDudeServer.Application.csproj", "{83252969-2D0E-468B-8414-79A667A97871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{80125D70-07F3-43DB-A790-1FC8851AC2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80125D70-07F3-43DB-A790-1FC8851AC2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80125D70-07F3-43DB-A790-1FC8851AC2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83252969-2D0E-468B-8414-79A667A97871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83252969-2D0E-468B-8414-79A667A97871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83252969-2D0E-468B-8414-79A667A97871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83252969-2D0E-468B-8414-79A667A97871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
