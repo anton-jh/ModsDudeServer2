@@ -1,4 +1,4 @@
-﻿using ModsDudeServer.Domain.Repo;
+﻿using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
 using System;
 using System.Collections.Generic;

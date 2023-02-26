@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Domain.Repos;
-public class RepoInviteId : GuidId<RepoInviteId>
+namespace ModsDudeServer.Domain.Invites;
+public class InviteId : GuidId<InviteId>
 {
 }

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Domain.Plugins;
-public class Plugin
+namespace ModsDudeServer.Domain.Adapters;
+public class Adapter
 {
-    public Plugin(PluginId id, DisplayName name, Description description)
+    public Adapter(AdapterId id, DisplayName name, Description description)
     {
         Id = id;
         Name = name;
@@ -16,8 +16,8 @@ public class Plugin
     }
 
 
-    public PluginId Id { get; }
+    public AdapterId Id { get; }
     public DisplayName Name { get; set; }
     public Description Description { get; set; }
-    public required PluginFileInfo File { get; set; }
+    public required AdapterFileInfo File { get; set; }
 }

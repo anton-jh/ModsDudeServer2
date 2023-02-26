@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ValueOf;
 
-namespace ModsDudeServer.Domain.Repo;
+namespace ModsDudeServer.Domain.Repos;
 public class RepoId : GuidId<RepoId>
 {
 }

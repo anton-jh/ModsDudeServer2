@@ -1,19 +1,19 @@
-﻿using ModsDudeServer.Domain.Games;
-using ModsDudeServer.Domain.Information;
+﻿using ModsDudeServer.Domain.Information;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ModsDudeServer.Domain.Helpers;
+using ModsDudeServer.Domain.Repos;
 
 namespace ModsDudeServer.Domain.Mods;
 public class Mod
 {
-    public Mod(ModId id, GameId gameId, DisplayName name, Description description)
+    public Mod(ModId id, RepoId repoId, DisplayName name, Description description)
     {
         Id = id;
-        GameId = gameId;
+        RepoId = repoId;
         Name = name;
         Description = description;
         Categories = new HashSet<Category>();
@@ -22,7 +22,7 @@ public class Mod
 
 
     public ModId Id { get; }
-    public GameId GameId { get; }
+    public RepoId RepoId { get; }
     public DisplayName Name { get; }
     public Description Description { get; set; }
     public ISet<Category> Categories { get; init; }

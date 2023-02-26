@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ValueOf;
 
-namespace ModsDudeServer.Domain.Plugins;
-public class PluginId : ValueOf<string, PluginId>
+namespace ModsDudeServer.Domain.Adapters;
+public class AdapterId : ValueOf<string, AdapterId>
 {
 }

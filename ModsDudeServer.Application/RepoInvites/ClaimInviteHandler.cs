@@ -2,7 +2,7 @@
 using ModsDudeServer.Application.Commands;
 using ModsDudeServer.Application.RepoInvites.Exceptions;
 using ModsDudeServer.DataAccess;
-using ModsDudeServer.Domain.Repo;
+using ModsDudeServer.Domain.Invites;
 using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
 using System;
@@ -12,13 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ModsDudeServer.Application.RepoInvites;
-public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
+public class ClaimInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly RepoInvitePruner _pruner;
 
 
-    public ClaimRepoInviteHandler(ApplicationDbContext dbContext, RepoInvitePruner pruner)
+    public ClaimInviteHandler(ApplicationDbContext dbContext, RepoInvitePruner pruner)
     {
         _dbContext = dbContext;
         _pruner = pruner;
@@ -27,11 +27,11 @@ public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
 
     public void Handle(ClaimRepoInviteCommand command)
     {
-        RepoInvite? invite = GetInvite(command.InviteId);
+        Invite? invite = GetInvite(command.InviteId);
 
         if (invite is null)
         {
-            throw new RepoInviteNotFoundException(command.InviteId);
+            throw new InviteNotFoundException(command.InviteId);
         }
 
         if (invite.Expires <= DateTimeOffset.UtcNow)
@@ -46,7 +46,7 @@ public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
 
         if (invite.MultiUse == false)
         {
-            _dbContext.RepoInvites.Remove(invite);
+            _dbContext.Invites.Remove(invite);
         }
 
         RepoMembership membership = new()
@@ -63,9 +63,9 @@ public class ClaimRepoInviteHandler : ICommandHandler<ClaimRepoInviteCommand>
     }
 
 
-    private RepoInvite? GetInvite(RepoInviteId inviteId)
+    private Invite? GetInvite(InviteId inviteId)
     {
-        return _dbContext.RepoInvites.Find(inviteId);
+        return _dbContext.Invites.Find(inviteId);
     }
 
 

@@ -1,4 +1,5 @@
-﻿using ModsDudeServer.Domain.Repos;
+﻿using ModsDudeServer.Domain.Invites;
+using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,11 @@ public class ClaimRepoInviteCommand
 {
     public ClaimRepoInviteCommand(Guid inviteId, User user)
     {
-        InviteId = RepoInviteId.From(inviteId);
+        InviteId = InviteId.From(inviteId);
         User = user;
     }
 
 
-    public RepoInviteId InviteId { get; }
+    public InviteId InviteId { get; }
     public User User { get; }
 }
