@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ModsDudeServer.Domain.Repo;
+using ModsDudeServer.Domain.Adapters;
+using ModsDudeServer.Domain.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ internal class RepoEntityTypeConfiguration : IEntityTypeConfiguration<Repo>
     {
         builder.HasKey(repo => repo.Id);
         builder.Property(repo => repo.Name);
+        builder.HasOne<Adapter>().WithOne().HasForeignKey<Repo>(repo => repo.AdapterId);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using ModsDudeServer.Application.Commands;
 using ModsDudeServer.Application.RepoInvites.Exceptions;
 using ModsDudeServer.DataAccess;
-using ModsDudeServer.Domain.Repo;
+using ModsDudeServer.Domain.Invites;
 using ModsDudeServer.Domain.Repos;
 using System;
 using System.Collections.Generic;
@@ -10,27 +10,30 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ModsDudeServer.Application.RepoInvites;
-public class CreateRepoInviteHandler : ICommandHandler<CreateRepoInviteCommand>
+public class CreateInviteHandler : ICommandHandler<CreateInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
 
 
-    public CreateRepoInviteHandler(ApplicationDbContext dbContext)
+    public CreateInviteHandler(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
 
-    public void Handle(CreateRepoInviteCommand command)
+    public void Handle(CreateInviteCommand command)
     {
-        if (CheckRepoExists(command.RepoId) == false)
+        foreach (RepoId repoId in command.RepoIds)
         {
-            throw new RepoNotFoundException(command.RepoId);
+            if (CheckRepoExists(repoId) == false)
+            {
+                throw new RepoNotFoundException(repoId);
+            }
         }
 
-        RepoInvite repoInvite = new(command.RepoId, command.MembershipLevel, command.Expires, command.MultiUse);
+        Invite invite = new(command.MembershipLevel, command.Expires, command.MultiUse);
 
-        _dbContext.RepoInvites.Add(repoInvite);
+        _dbContext.Invites.Add(invite);
 
         _dbContext.SaveChanges();
     }

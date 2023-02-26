@@ -1,4 +1,5 @@
-﻿using ModsDudeServer.Domain.Repos;
+﻿using ModsDudeServer.Domain.Invites;
+using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,11 @@ public record SignupCommand
     {
         Username = UserName.From(username);
         Password = Password.From(password);
-        RepoInviteId = RepoInviteId.From(repoInviteId);
+        RepoInviteId = InviteId.From(repoInviteId);
     }
 
 
     public UserName Username { get; }
     public Password Password { get; }
-    public RepoInviteId RepoInviteId { get; }
+    public InviteId RepoInviteId { get; }
 }

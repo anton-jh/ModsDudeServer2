@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModsDudeServer.Domain.Repos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,4 +21,10 @@ public class User
     public UserName UserName { get; set; }
     public PasswordHash PasswordHash { get; set; }
     public ISet<RepoMembership> RepoMemberships { get; init; }
+
+
+    public bool IsMemberOf(RepoId repoId)
+    {
+        return RepoMemberships.Any(membership => membership.RepoId == repoId);
+    }
 }

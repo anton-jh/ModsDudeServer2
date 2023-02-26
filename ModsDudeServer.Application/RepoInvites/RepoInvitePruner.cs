@@ -20,6 +20,6 @@ public class RepoInvitePruner
 
     public void Prune()
     {
-        _dbContext.RepoInvites.Where(invite => invite.Expires <= DateTimeOffset.UtcNow).ExecuteDelete();
+        _dbContext.Invites.Where(invite => invite.Expires <= DateTimeOffset.UtcNow).ExecuteDelete();
     }
 }

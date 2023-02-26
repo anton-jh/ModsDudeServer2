@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Domain.Users;
-public class RepoMembership
+namespace ModsDudeServer.Domain.Invites;
+public class RepoInvite
 {
     public required RepoId RepoId { get; init; }
-    public required RepoMembershipLevel Level { get; set; }
 }

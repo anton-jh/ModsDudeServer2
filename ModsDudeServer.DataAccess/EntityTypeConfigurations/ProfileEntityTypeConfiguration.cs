@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ModsDudeServer.Domain.Games;
 using ModsDudeServer.Domain.Profiles;
+using ModsDudeServer.Domain.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ internal class ProfileEntityTypeConfiguration : IEntityTypeConfiguration<Profile
     public void Configure(EntityTypeBuilder<Profile> builder)
     {
         builder.HasKey(profile => profile.Id);
-        builder.HasOne<Game>().WithMany().HasForeignKey(profile => profile.GameId);
+        builder.HasOne<Repo>().WithMany().HasForeignKey(profile => profile.RepoId);
         builder.Property(profile => profile.Name);
         builder.OwnsMany(profile => profile.Mods);
         builder.OwnsOne(profile => profile.Savegame, savegameBuilder =>
