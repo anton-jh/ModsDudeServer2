@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ModsDudeServer.Application.RepoInvites;
-public class ClaimRepoInviteCommand
+public class ClaimInviteCommand
 {
-    public ClaimRepoInviteCommand(Guid inviteId, User user)
+    public ClaimInviteCommand(Guid inviteId, User user)
     {
         InviteId = InviteId.From(inviteId);
         User = user;

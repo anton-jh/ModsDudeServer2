@@ -60,7 +60,6 @@ namespace ModsDudeServer.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RepoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MembershipLevel = table.Column<int>(type: "int", nullable: false),
                     Expires = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     MultiUse = table.Column<bool>(type: "bit", nullable: false)
@@ -68,10 +67,24 @@ namespace ModsDudeServer.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Invites", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RepoInvite",
+                columns: table => new
+                {
+                    InviteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RepoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RepoInvite", x => new { x.InviteId, x.Id });
                     table.ForeignKey(
-                        name: "FK_Invites_Repos_RepoId",
-                        column: x => x.RepoId,
-                        principalTable: "Repos",
+                        name: "FK_RepoInvite_Invites_InviteId",
+                        column: x => x.InviteId,
+                        principalTable: "Invites",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -81,11 +94,6 @@ namespace ModsDudeServer.DataAccess.Migrations
                 table: "Repos",
                 column: "AdapterId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Invites_RepoId",
-                table: "Invites",
-                column: "RepoId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Mods_Repos_RepoId",
@@ -126,6 +134,9 @@ namespace ModsDudeServer.DataAccess.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Repos_Plugins_AdapterId",
                 table: "Repos");
+
+            migrationBuilder.DropTable(
+                name: "RepoInvite");
 
             migrationBuilder.DropTable(
                 name: "Invites");

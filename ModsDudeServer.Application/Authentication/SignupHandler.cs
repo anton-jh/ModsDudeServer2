@@ -14,10 +14,10 @@ namespace ModsDudeServer.Application.Authentication;
 public class SignupHandler : ICommandHandler<SignupCommand>
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly ICommandHandler<ClaimRepoInviteCommand> _claimInviteHandler;
+    private readonly ICommandHandler<ClaimInviteCommand> _claimInviteHandler;
 
 
-    public SignupHandler(ApplicationDbContext dbContext, ICommandHandler<ClaimRepoInviteCommand> claimInviteHandler)
+    public SignupHandler(ApplicationDbContext dbContext, ICommandHandler<ClaimInviteCommand> claimInviteHandler)
     {
         _dbContext = dbContext;
         _claimInviteHandler = claimInviteHandler;

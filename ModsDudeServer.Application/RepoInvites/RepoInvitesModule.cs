@@ -11,8 +11,8 @@ public static class RepoInvitesModule
 {
     public static IServiceCollection AddRepoInvitesModule(this IServiceCollection services)
     {
-        services.AddScoped<ICommandHandler<CreateRepoInviteCommand>, CreateRepoInviteHandler>();
-        services.AddScoped<ICommandHandler<ClaimRepoInviteCommand>, ClaimInviteHandler>();
+        services.AddScoped<ICommandHandler<CreateInviteCommand>, CreateInviteHandler>();
+        services.AddScoped<ICommandHandler<ClaimInviteCommand>, ClaimInviteHandler>();
         services.AddScoped<RepoInvitePruner>();
 
         return services;

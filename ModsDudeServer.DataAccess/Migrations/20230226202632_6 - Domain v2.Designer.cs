@@ -12,7 +12,7 @@ using ModsDudeServer.DataAccess;
 namespace ModsDudeServer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230226195636_6 - Domain v2")]
+    [Migration("20230226202632_6 - Domain v2")]
     partial class _6Domainv2
     {
         /// <inheritdoc />
@@ -72,12 +72,7 @@ namespace ModsDudeServer.DataAccess.Migrations
                     b.Property<bool>("MultiUse")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("RepoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RepoId");
 
                     b.ToTable("Invites");
                 });
@@ -239,11 +234,29 @@ namespace ModsDudeServer.DataAccess.Migrations
 
             modelBuilder.Entity("ModsDudeServer.Domain.Invites.Invite", b =>
                 {
-                    b.HasOne("ModsDudeServer.Domain.Repos.Repo", null)
-                        .WithMany()
-                        .HasForeignKey("RepoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsMany("ModsDudeServer.Domain.Invites.RepoInvite", "RepoInvites", b1 =>
+                        {
+                            b1.Property<Guid>("InviteId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+
+                            b1.Property<Guid>("RepoId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.HasKey("InviteId", "Id");
+
+                            b1.ToTable("RepoInvite");
+
+                            b1.WithOwner()
+                                .HasForeignKey("InviteId");
+                        });
+
+                    b.Navigation("RepoInvites");
                 });
 
             modelBuilder.Entity("ModsDudeServer.Domain.Mods.Mod", b =>
