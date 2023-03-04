@@ -18,7 +18,7 @@ public class InvitePruner
     }
 
 
-    public void Prune()
+    public void Run()
     {
         _dbContext.Invites.Where(invite => invite.Expires <= DateTimeOffset.UtcNow).ExecuteDelete();
     }

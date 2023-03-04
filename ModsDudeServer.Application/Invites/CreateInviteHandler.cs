@@ -13,11 +13,13 @@ namespace ModsDudeServer.Application.Invites;
 public class CreateInviteHandler : ICommandHandler<CreateInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
+    private readonly InvitePruner _invitePruner;
 
 
-    public CreateInviteHandler(ApplicationDbContext dbContext)
+    public CreateInviteHandler(ApplicationDbContext dbContext, InvitePruner invitePruner)
     {
         _dbContext = dbContext;
+        _invitePruner = invitePruner;
     }
 
 
@@ -34,8 +36,9 @@ public class CreateInviteHandler : ICommandHandler<CreateInviteCommand>
         Invite invite = new(command.Expires, command.MultiUse);
 
         _dbContext.Invites.Add(invite);
-
         _dbContext.SaveChanges();
+
+        _invitePruner.Run();
     }
 
 

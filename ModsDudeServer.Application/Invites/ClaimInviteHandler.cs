@@ -14,13 +14,11 @@ namespace ModsDudeServer.Application.Invites;
 public class ClaimInviteHandler : ICommandHandler<ClaimInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly InvitePruner _pruner;
 
 
-    public ClaimInviteHandler(ApplicationDbContext dbContext, InvitePruner pruner)
+    public ClaimInviteHandler(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-        _pruner = pruner;
     }
 
 
@@ -46,8 +44,6 @@ public class ClaimInviteHandler : ICommandHandler<ClaimInviteCommand>
         CreateMemberships(command.User, invite);
 
         _dbContext.SaveChanges();
-
-        _pruner.Prune();
     }
 
 
