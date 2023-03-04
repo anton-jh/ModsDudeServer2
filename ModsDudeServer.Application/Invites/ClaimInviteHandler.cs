@@ -1,6 +1,6 @@
 ﻿using ModsDudeServer.Application.Authentication;
 using ModsDudeServer.Application.Commands;
-using ModsDudeServer.Application.RepoInvites.Exceptions;
+using ModsDudeServer.Application.Invites.Exceptions;
 using ModsDudeServer.DataAccess;
 using ModsDudeServer.Domain.Invites;
 using ModsDudeServer.Domain.Users;
@@ -10,17 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.RepoInvites;
+namespace ModsDudeServer.Application.Invites;
 public class ClaimInviteHandler : ICommandHandler<ClaimInviteCommand>
 {
     private readonly ApplicationDbContext _dbContext;
-    private readonly RepoInvitePruner _pruner;
 
 
-    public ClaimInviteHandler(ApplicationDbContext dbContext, RepoInvitePruner pruner)
+    public ClaimInviteHandler(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
-        _pruner = pruner;
     }
 
 
@@ -43,16 +41,9 @@ public class ClaimInviteHandler : ICommandHandler<ClaimInviteCommand>
             _dbContext.Invites.Remove(invite);
         }
 
-        if (invite.RepoInvites.Any())
-        {
-
-        }
-
         CreateMemberships(command.User, invite);
 
         _dbContext.SaveChanges();
-
-        _pruner.Prune();
     }
 
 

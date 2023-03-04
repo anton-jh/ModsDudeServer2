@@ -14,8 +14,10 @@ internal class InviteEntityTypeConfiguration : IEntityTypeConfiguration<Invite>
     public void Configure(EntityTypeBuilder<Invite> builder)
     {
         builder.HasKey(invite => invite.Id);
-        builder.OwnsMany(invite => invite.RepoInvites);
-        builder.Property(invite => invite.MembershipLevel);
+        builder.OwnsMany(invite => invite.RepoInvites, repoInviteBuilder =>
+        {
+            repoInviteBuilder.HasOne<Repo>().WithMany().HasForeignKey(repoInvite => repoInvite.RepoId);
+        });
         builder.Property(invite => invite.Expires);
         builder.Property(invite => invite.MultiUse);
     }

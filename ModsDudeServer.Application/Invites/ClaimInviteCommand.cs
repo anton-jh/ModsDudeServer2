@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.RepoInvites;
+namespace ModsDudeServer.Application.Invites;
 public class ClaimInviteCommand
 {
     public ClaimInviteCommand(Guid inviteId, User user)

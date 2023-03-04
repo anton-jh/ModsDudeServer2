@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.RepoInvites;
-public static class RepoInvitesModule
+namespace ModsDudeServer.Application.Invites;
+public static class InvitesModule
 {
     public static IServiceCollection AddRepoInvitesModule(this IServiceCollection services)
     {
         services.AddScoped<ICommandHandler<CreateInviteCommand>, CreateInviteHandler>();
         services.AddScoped<ICommandHandler<ClaimInviteCommand>, ClaimInviteHandler>();
-        services.AddScoped<RepoInvitePruner>();
+        services.AddScoped<InvitePruner>();
 
         return services;
     }
