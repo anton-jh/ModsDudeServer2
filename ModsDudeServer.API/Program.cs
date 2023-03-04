@@ -1,6 +1,6 @@
 using ModsDudeServer.API.Endpoints.Authentication;
 using ModsDudeServer.Application.Authentication;
-using ModsDudeServer.Application.RepoInvites;
+using ModsDudeServer.Application.Invites;
 using ModsDudeServer.DataAccess.Module;
 
 var builder = WebApplication.CreateBuilder(args);

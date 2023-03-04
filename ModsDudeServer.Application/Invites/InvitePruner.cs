@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.RepoInvites;
-public class RepoInvitePruner
+namespace ModsDudeServer.Application.Invites;
+public class InvitePruner
 {
     private readonly ApplicationDbContext _dbContext;
 
 
-    public RepoInvitePruner(ApplicationDbContext dbContext)
+    public InvitePruner(ApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }

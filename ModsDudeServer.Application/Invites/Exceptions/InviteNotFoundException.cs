@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModsDudeServer.Application.RepoInvites.Exceptions;
+namespace ModsDudeServer.Application.Invites.Exceptions;
 public class InviteNotFoundException : Exception
 {
     public InviteNotFoundException(InviteId inviteId)

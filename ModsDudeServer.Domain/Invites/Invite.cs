@@ -10,11 +10,10 @@ using ValueOf;
 namespace ModsDudeServer.Domain.Invites;
 public class Invite
 {
-    public Invite(RepoMembershipLevel membershipLevel, DateTimeOffset expires, bool multiUse)
+    public Invite(DateTimeOffset expires, bool multiUse)
     {
         Id = InviteId.NewId();
         RepoInvites = new HashSet<RepoInvite>();
-        MembershipLevel = membershipLevel;
         Expires = expires;
         MultiUse = multiUse;
     }
@@ -22,7 +21,6 @@ public class Invite
 
     public InviteId Id { get; init; }
     public ISet<RepoInvite> RepoInvites { get; init; }
-    public RepoMembershipLevel MembershipLevel { get; }
     public DateTimeOffset Expires { get; }
     public bool MultiUse { get; }
 }

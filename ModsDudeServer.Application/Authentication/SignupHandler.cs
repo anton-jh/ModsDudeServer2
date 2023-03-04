@@ -1,6 +1,6 @@
 ﻿using ModsDudeServer.Application.Authentication.Exceptions;
 using ModsDudeServer.Application.Commands;
-using ModsDudeServer.Application.RepoInvites;
+using ModsDudeServer.Application.Invites;
 using ModsDudeServer.DataAccess;
 using ModsDudeServer.Domain.Repos;
 using ModsDudeServer.Domain.Users;
