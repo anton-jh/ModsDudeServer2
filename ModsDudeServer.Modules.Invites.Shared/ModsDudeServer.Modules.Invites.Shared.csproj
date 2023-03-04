@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.Domain\ModsDudeServer.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

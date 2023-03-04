@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModsDudeServer.Common\ModsDudeServer.Common.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.Domain\ModsDudeServer.Domain.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.Modules.Invites.Shared\ModsDudeServer.Modules.Invites.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
