@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ModsDudeServer.API.Endpoints.Authentication.Dtos;
-using ModsDudeServer.Application.Authentication;
+using ModsDudeServer.Modules.Authentication.Core.Login;
 
 namespace ModsDudeServer.API.Endpoints.Authentication;
 

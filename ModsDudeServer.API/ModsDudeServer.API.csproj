@@ -17,8 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModsDudeServer.Application\ModsDudeServer.Application.csproj" />
     <ProjectReference Include="..\ModsDudeServer.DataAccess\ModsDudeServer.DataAccess.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.Modules.Authentication.Core\ModsDudeServer.Modules.Authentication.Core.csproj" />
+    <ProjectReference Include="..\ModsDudeServer.Modules.Invites.Core\ModsDudeServer.Modules.Invites.Core.csproj" />
   </ItemGroup>
 
 </Project>
